@@ -1,4 +1,4 @@
-# @ooopsstudio/cms-astro
+# @ooopsstudio/workspace-astro
 
 Astro-friendly helpers for CMS consumer sites.
 
@@ -7,13 +7,13 @@ This package is helpers-only. It does not ship Astro components, routes, UI, Clo
 ## Install
 
 ```sh
-pnpm add @ooopsstudio/cms-astro @ooopsstudio/cms-api
+pnpm add @ooopsstudio/workspace-astro @ooopsstudio/workspace-api
 ```
 
 ## Env and Client Setup
 
 ```ts
-import { createCmsClientFromAstroEnv, readCmsAstroEnv } from '@ooopsstudio/cms-astro';
+import { createCmsClientFromAstroEnv, readCmsAstroEnv } from '@ooopsstudio/workspace-astro';
 
 const env = readCmsAstroEnv(import.meta.env);
 const cms = createCmsClientFromAstroEnv(import.meta.env);
@@ -36,7 +36,7 @@ The package deliberately accepts only the CMS env names because it has not yet b
 ## Sitemap
 
 ```ts
-import { createSitemapUrl, renderSitemapXml } from '@ooopsstudio/cms-astro';
+import { createSitemapUrl, renderSitemapXml } from '@ooopsstudio/workspace-astro';
 
 const urls = [
   createSitemapUrl('https://site.example', '/', { priority: 1 }),
@@ -52,7 +52,7 @@ export const GET = () =>
 ## JSON-LD
 
 ```ts
-import { websiteJsonLd, articleJsonLd } from '@ooopsstudio/cms-astro';
+import { websiteJsonLd, articleJsonLd } from '@ooopsstudio/workspace-astro';
 
 const siteSchema = websiteJsonLd({
   name: 'Portfolio',
@@ -71,7 +71,7 @@ const articleSchema = articleJsonLd({
 Default locale routes are unprefixed. Secondary locale routes are prefixed.
 
 ```ts
-import { alternateLocales, localePath } from '@ooopsstudio/cms-astro';
+import { alternateLocales, localePath } from '@ooopsstudio/workspace-astro';
 
 localePath({ locale: 'en', defaultLocale: 'en', path: '/about' }); // /about
 localePath({ locale: 'el', defaultLocale: 'en', path: '/about' }); // /el/about
@@ -89,7 +89,7 @@ alternateLocales({
 
 ## Boundaries
 
-Use `@ooopsstudio/cms-cloudflare` for preview redirects, rebuild webhooks, signatures, and Cloudflare deploy hooks.
+Use `@ooopsstudio/workspace-cloudflare` for preview redirects, rebuild webhooks, signatures, and Cloudflare deploy hooks.
 
 Keep project-specific content mappers, Astro layouts, pages, and visual rendering in your site template.
 

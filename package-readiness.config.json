@@ -13,12 +13,12 @@
 		"internal"
 	],
 	"packages": {
-		"@ooopsstudio/cms-api": {
+		"@ooopsstudio/workspace-api": {
 			"ignoredWarningCodes": [
 				"debug-statement"
 			]
 		},
-		"@ooopsstudio/cms-cloudflare": {
+		"@ooopsstudio/workspace-cloudflare": {
 			"ignoredWarningCodes": [
 				"secret-looking-text"
 			]

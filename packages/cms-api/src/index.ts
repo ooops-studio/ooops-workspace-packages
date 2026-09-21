@@ -22,7 +22,15 @@ export type CmsQuery = CmsApiRequestOptions['query']
 
 export type CmsRecord = Record<string, unknown>
 
+/** Current CMS v1 single envelope. Readers return wire data without rewriting it. */
 export type CmsSingleResponse<T = CmsRecord> = {
+	ok: true;
+	apiId?: string;
+	data: T;
+}
+
+/** Pre-data envelope, retained explicitly for consumers of older CMS instances. */
+export type CmsLegacySingleResponse<T = CmsRecord> = {
 	ok: true;
 	content: T;
 }

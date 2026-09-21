@@ -22,7 +22,7 @@ import {
 const now = '2026-07-09T10:00:00.000Z'
 const secret = 'cms-preview-session-secret'
 
-describe('Ooops CMS preview request contract', () => {
+describe('Ooops Workspace preview request contract', () => {
 	it('reads the CMS-issued opaque token from the canonical preview parameter', () => {
 		const request = new Request('https://site.example/preview/content/singles/homepage?preview=preview_123')
 		expect(readCmsPreviewToken(request)).toBe('preview_123')

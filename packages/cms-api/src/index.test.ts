@@ -1,6 +1,8 @@
 import {describe, expect, it, vi} from 'vitest'
 
 import {
+	type CmsSingleResponse,
+	type CmsLegacySingleResponse,
 	createCmsClient,
 	createCmsDraftWriter,
 	createCmsPreviewClient,
@@ -262,4 +264,12 @@ describe('public consumer clients', () => {
 			code: 'request_timeout'
 		})
 	})
+})
+
+// Published readers intentionally preserve the wire envelope during rolling upgrades.
+it('reads current data and explicit legacy content single envelopes without mutation', async() => {
+	for (const payload of [{ok: true, data: {title: 'Current'}} satisfies CmsSingleResponse, {ok: true, content: {title: 'Legacy'}} satisfies CmsLegacySingleResponse]) {
+		const client = new OoopsCmsClient({baseUrl: 'https://cms.example.test/api/cms/v1', token: 'fixture', fetch: (async() => Response.json(payload)) as typeof fetch})
+		expect(await client.content.getSingle('homepage')).toEqual(payload)
+	}
 })

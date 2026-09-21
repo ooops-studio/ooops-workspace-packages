@@ -1,4 +1,4 @@
-import {OoopsCmsClient} from '@ooopsstudio/cms-api'
+import {OoopsCmsClient} from '@ooopsstudio/workspace-api'
 
 export type CmsAstroEnv = Record<string, string | boolean | number | undefined>
 

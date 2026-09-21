@@ -1,15 +1,15 @@
-# @ooopsstudio/cms-cloudflare
+# @ooopsstudio/workspace-cloudflare
 
-Cloudflare-friendly helpers for secure Ooops CMS draft previews and signed, replay-safe static-site rebuilds.
+Cloudflare-friendly helpers for secure Ooops Workspace draft previews and signed, replay-safe static-site rebuilds.
 
-The CMS redirects an editor to a consumer route with a short-lived opaque `preview` token. The consumer validates that token server-side with `@ooopsstudio/cms-api`, removes it from the browser URL, and stores it in an encrypted, scoped, `HttpOnly` session cookie. Draft responses must remain private and unindexable.
+The CMS redirects an editor to a consumer route with a short-lived opaque `preview` token. The consumer validates that token server-side with `@ooopsstudio/workspace-api`, removes it from the browser URL, and stores it in an encrypted, scoped, `HttpOnly` session cookie. Draft responses must remain private and unindexable.
 
-This package is framework-agnostic and ships no framework routes or UI. Its rebuild contract is the contract emitted by Ooops CMS deployment deliveries.
+This package is framework-agnostic and ships no framework routes or UI. Its rebuild contract is the contract emitted by Ooops Workspace deployment deliveries.
 
 ## Install
 
 ```sh
-pnpm add @ooopsstudio/cms-api @ooopsstudio/cms-cloudflare
+pnpm add @ooopsstudio/workspace-api @ooopsstudio/workspace-cloudflare
 ```
 
 ## Validate the initial CMS handoff
@@ -19,7 +19,7 @@ import {
 	createCmsPreviewClientFromRequest,
 	createCmsPreviewSession,
 	serializeCmsPreviewSessionCookie
-} from '@ooopsstudio/cms-cloudflare'
+} from '@ooopsstudio/workspace-cloudflare'
 
 const result = createCmsPreviewClientFromRequest(request, {
 	baseUrl: env.OOOPS_CMS_API_BASE_URL,
@@ -57,7 +57,7 @@ The CMS preview token and CMS API token must never be exposed through a `PUBLIC_
 import {
 	createCmsPreviewClientFromSession,
 	readCmsPreviewSession
-} from '@ooopsstudio/cms-cloudflare'
+} from '@ooopsstudio/workspace-cloudflare'
 
 const session = await readCmsPreviewSession(request, {
 	secret: env.OOOPS_CMS_PREVIEW_SESSION_SECRET
@@ -77,7 +77,7 @@ const payload = session.kind === 'single'
 ## Protect draft responses
 
 ```ts
-import {withCmsPreviewResponseHeaders} from '@ooopsstudio/cms-cloudflare'
+import {withCmsPreviewResponseHeaders} from '@ooopsstudio/workspace-cloudflare'
 
 return withCmsPreviewResponseHeaders(new Response(html, {
 	headers: {'content-type': 'text/html; charset=utf-8'}
@@ -92,10 +92,10 @@ The helper sets:
 
 ## Rebuild an Astro SSG site after CMS publish
 
-Ooops CMS sends a signed event to a route owned by the deployed site. The route verifies the signature and timestamp, atomically claims the event id in durable storage, and then triggers the site's Cloudflare Workers Builds Deploy Hook. The Deploy Hook URL remains a Cloudflare secret and is never sent to or stored by the CMS.
+Ooops Workspace sends a signed event to a route owned by the deployed site. The route verifies the signature and timestamp, atomically claims the event id in durable storage, and then triggers the site's Cloudflare Workers Builds Deploy Hook. The Deploy Hook URL remains a Cloudflare secret and is never sent to or stored by the CMS.
 
 ```ts
-import {createCmsRebuildHandler} from '@ooopsstudio/cms-cloudflare'
+import {createCmsRebuildHandler} from '@ooopsstudio/workspace-cloudflare'
 
 const handler = createCmsRebuildHandler({
 	secret: env.OOOPS_CMS_REBUILD_SECRET,

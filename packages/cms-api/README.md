@@ -1,17 +1,17 @@
-# @ooopsstudio/cms-api
+# @ooopsstudio/workspace-api
 
-Typed TypeScript client for Ooops CMS REST API v1.
+Typed TypeScript client for Ooops Workspace REST API v1.
 
 ## Installation
 
 ```bash
-pnpm add @ooopsstudio/cms-api
+pnpm add @ooopsstudio/workspace-api
 ```
 
 The package is ESM-only and supports Node.js 22.14 or newer.
 
 ```ts
-import { createCmsClient } from '@ooopsstudio/cms-api';
+import { createCmsClient } from '@ooopsstudio/workspace-api';
 
 const cms = createCmsClient({
   baseUrl: 'https://cms.example.com/api/cms/v1',
@@ -29,7 +29,7 @@ Use API tokens only in server-side integrations. The authenticated read client m
 Draft editor tokens are field-scoped and server-side only. Create them in CMS Settings → Integrations, store them in a protected server or edge environment variable, and use the separate writer factory:
 
 ```ts
-import { createCmsDraftWriter } from '@ooopsstudio/cms-api';
+import { createCmsDraftWriter } from '@ooopsstudio/workspace-api';
 
 const writer = createCmsDraftWriter({
   baseUrl: 'https://cms.example.com/api/cms/v1',
@@ -51,7 +51,7 @@ Every patch requires the latest revision and is atomic. The writer can update ex
 Public forms use the tokenless `/api/cms/public` endpoint. The client accepts either the CMS origin or the v1 API base URL:
 
 ```ts
-import { createCmsPublicFormsClient } from '@ooopsstudio/cms-api';
+import { createCmsPublicFormsClient } from '@ooopsstudio/workspace-api';
 
 const publicForms = createCmsPublicFormsClient({ baseUrl: 'https://cms.example.com' });
 await publicForms.forms.submit(process.env.CMS_FORM_SHARE_TOKEN!, {
@@ -62,7 +62,7 @@ await publicForms.forms.submit(process.env.CMS_FORM_SHARE_TOKEN!, {
 Draft previews require both a scoped CMS API token and the short-lived preview token:
 
 ```ts
-import { createCmsPreviewClient } from '@ooopsstudio/cms-api';
+import { createCmsPreviewClient } from '@ooopsstudio/workspace-api';
 
 const preview = createCmsPreviewClient({
   baseUrl: 'https://cms.example.com/api/cms/v1',
@@ -82,3 +82,7 @@ GET /api/cms/v1/openapi.json
 ## License
 
 MIT
+
+### Single response compatibility
+
+`CmsSingleResponse<T>` describes the current `{ ok: true, data: T }` wire response. For older CMS versions use `CmsLegacySingleResponse<T>` (`content`) explicitly, or a union during a rolling upgrade. Readers do not silently rewrite server payloads. This type correction is queued for the next minor release; existing 0.3.x consumers may retain their explicit data/content union until upgrading.

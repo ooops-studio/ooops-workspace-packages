@@ -1,5 +1,5 @@
 {
-  "name": "@ooopsstudio/cms-api-adapter",
+  "name": "@ooopsstudio/workspace-api-adapter",
   "version": "0.0.0",
   "type": "module",
   "publishConfig": {

@@ -1,7 +1,7 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Ooops CMS API",
+    "title": "Ooops Workspace API",
     "version": "1.0.0",
     "description": "External REST API for read integrations and field-scoped server-side draft editing."
   },
@@ -39,6 +39,157 @@
       }
     },
     "schemas": {
+      "ResponsiveImageSource": {
+        "type": "object",
+        "required": [
+          "url",
+          "mimeType",
+          "width",
+          "height",
+          "sizeBytes"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "mimeType": {
+            "type": "string",
+            "enum": [
+              "image/avif",
+              "image/webp"
+            ]
+          },
+          "width": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "height": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "sizeBytes": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      },
+      "VideoDelivery": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "playbackStatusUrl": {
+            "type": "string",
+            "format": "uri",
+            "description": "Anonymous no-store status check for originals and optimized video. Delivery rechecks policy; this URL does not reserve capacity."
+          },
+          "width": {
+            "type": "integer"
+          },
+          "height": {
+            "type": "integer"
+          },
+          "durationSeconds": {
+            "type": "number"
+          },
+          "poster": {
+            "$ref": "#/components/schemas/VideoSource"
+          },
+          "mp4": {
+            "$ref": "#/components/schemas/VideoSource"
+          },
+          "hls": {
+            "$ref": "#/components/schemas/VideoSource"
+          }
+        }
+      },
+      "VideoPlaybackStatus": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "allowed",
+          "reason",
+          "retryAfterSeconds"
+        ],
+        "properties": {
+          "allowed": {
+            "type": "boolean"
+          },
+          "reason": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              null,
+              "allowance_reached",
+              "busy",
+              "unavailable"
+            ]
+          },
+          "retryAfterSeconds": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1
+          }
+        }
+      },
+      "VideoSource": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "url",
+          "mimeType"
+        ],
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "mimeType": {
+            "type": "string"
+          },
+          "sizeBytes": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      },
+      "MediaAsset": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "video": {
+            "$ref": "#/components/schemas/VideoDelivery"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "publicUrl": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResponsiveImageSource"
+            },
+            "description": "Ready, permitted responsive variants. The original URL and asset ID remain unchanged."
+          }
+        }
+      },
       "Error": {
         "type": "object",
         "required": [
@@ -128,6 +279,66 @@
     }
   ],
   "paths": {
+    "/assets/playback/{assetId}": {
+      "get": {
+        "tags": [
+          "Media"
+        ],
+        "servers": [
+          {
+            "url": "/"
+          }
+        ],
+        "security": [],
+        "summary": "Check public video playback policy without reserving capacity",
+        "parameters": [
+          {
+            "name": "assetId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Allowed, allowance reached or busy; always no-store.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VideoPlaybackStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown, non-public or non-video asset."
+          },
+          "429": {
+            "description": "Rate limited; Retry-After in seconds.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VideoPlaybackStatus"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable; Retry-After in seconds.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VideoPlaybackStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/schema": {
       "get": {
         "tags": [
@@ -1369,14 +1580,15 @@
                 "schema": {
                   "type": "object",
                   "required": [
-                    "ok"
+                    "ok",
+                    "data"
                   ],
                   "properties": {
                     "ok": {
                       "type": "boolean",
                       "const": true
                     },
-                    "content": {
+                    "data": {
                       "type": "object",
                       "additionalProperties": true
                     }
@@ -2039,8 +2251,7 @@
                     "items": {
                       "type": "array",
                       "items": {
-                        "type": "object",
-                        "additionalProperties": true
+                        "$ref": "#/components/schemas/MediaAsset"
                       }
                     },
                     "nextCursor": {
@@ -2154,8 +2365,7 @@
                       "const": true
                     },
                     "asset": {
-                      "type": "object",
-                      "additionalProperties": true
+                      "$ref": "#/components/schemas/MediaAsset"
                     }
                   },
                   "additionalProperties": true

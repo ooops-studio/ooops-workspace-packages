@@ -22,7 +22,7 @@ await run('node', [
 await run('node', [
 	'./scripts/deprecate-package.mjs',
 	'--package',
-	'@ooopsstudio/cms-api'
+	'@ooopsstudio/workspace-api'
 ])
 
 console.log('Package creation and migration tool smoke checks passed.')

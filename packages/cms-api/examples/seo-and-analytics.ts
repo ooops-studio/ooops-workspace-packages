@@ -1,4 +1,4 @@
-import { OoopsCmsClient } from '@ooopsstudio/cms-api';
+import { OoopsCmsClient } from '@ooopsstudio/workspace-api';
 
 const cms = new OoopsCmsClient({
   baseUrl: process.env.OOOPS_CMS_API_BASE_URL ?? 'https://cms.ooops.work/api/cms/v1',

@@ -1,7 +1,7 @@
 {
-  "name": "@ooopsstudio/cms-cloudflare",
-  "version": "0.3.2",
-  "description": "Cloudflare helpers for secure Ooops CMS previews and signed static-site rebuilds.",
+  "name": "@ooopsstudio/workspace-cloudflare",
+  "version": "0.4.0",
+  "description": "Cloudflare helpers for secure Ooops Workspace previews and signed static-site rebuilds.",
   "type": "module",
   "private": false,
   "license": "MIT",
@@ -20,7 +20,7 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
-    "typecheck": "corepack pnpm --filter @ooopsstudio/cms-api build && tsc -p tsconfig.json --noEmit",
+    "typecheck": "corepack pnpm --filter @ooopsstudio/workspace-api build && tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
     "prepack": "corepack pnpm build",
     "pack:dry": "npm pack --dry-run",
@@ -34,16 +34,16 @@
     "vitest": "^3.2.7"
   },
   "dependencies": {
-    "@ooopsstudio/cms-api": "^0.3.0"
+    "@ooopsstudio/workspace-api": "^0.4.0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ooops-studio/ooops-cms-packages.git",
+    "url": "git+https://github.com/ooops-studio/ooops-workspace-packages.git",
     "directory": "packages/cms-cloudflare"
   },
-  "homepage": "https://github.com/ooops-studio/ooops-cms-packages/tree/main/packages/cms-cloudflare#readme",
+  "homepage": "https://github.com/ooops-studio/ooops-workspace-packages/tree/main/packages/cms-cloudflare#readme",
   "bugs": {
-    "url": "https://github.com/ooops-studio/ooops-cms-packages/issues"
+    "url": "https://github.com/ooops-studio/ooops-workspace-packages/issues"
   },
   "publishConfig": {
     "access": "public"

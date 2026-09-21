@@ -2,7 +2,7 @@ import {
 	createCmsPreviewClient,
 	type CmsApiFetch,
 	type OoopsCmsPreviewClient
-} from '@ooopsstudio/cms-api'
+} from '@ooopsstudio/workspace-api'
 
 export * from './rebuild.js'
 
@@ -53,13 +53,13 @@ const defaultTtlSeconds = 30 * 60
 const encoder = new TextEncoder()
 const decoder = new TextDecoder()
 
-/** Read the opaque preview token issued by Ooops CMS from the canonical query parameter. */
+/** Read the opaque preview token issued by Ooops Workspace from the canonical query parameter. */
 export const readCmsPreviewToken = (request: Request, parameter = 'preview') => {
 	const token = new URL(request.url).searchParams.get(parameter)?.trim()
 	return token || null
 }
 
-/** Build the consumer route shape that Ooops CMS uses for draft preview redirects. */
+/** Build the consumer route shape that Ooops Workspace uses for draft preview redirects. */
 export const cmsPreviewPath = ({
 	apiId,
 	kind,

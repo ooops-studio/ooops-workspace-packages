@@ -1,7 +1,7 @@
 # Repository Setup
 
-- Workspace: `@ooopsstudio/cms-packages`
-- Repository: `https://github.com/ooops-studio/ooops-cms-packages`
+- Workspace: `@ooopsstudio/workspace-packages`
+- Repository: `https://github.com/ooops-studio/ooops-workspace-packages`
 - Registry: npm
 - Package access: public
 - Publishing: npm trusted publishing

@@ -1,7 +1,7 @@
 {
-  "name": "@ooopsstudio/cms-astro",
-  "version": "0.2.2",
-  "description": "Astro-friendly helpers for Ooops CMS consumer sites.",
+  "name": "@ooopsstudio/workspace-astro",
+  "version": "0.3.0",
+  "description": "Astro-friendly helpers for Ooops Workspace consumer sites.",
   "type": "module",
   "private": false,
   "license": "MIT",
@@ -20,7 +20,7 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
-    "typecheck": "corepack pnpm --filter @ooopsstudio/cms-api build && tsc -p tsconfig.json --noEmit",
+    "typecheck": "corepack pnpm --filter @ooopsstudio/workspace-api build && tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
     "prepack": "corepack pnpm build",
     "pack:dry": "npm pack --dry-run",
@@ -30,7 +30,7 @@
     "depcruise": "depcruise --config ../../.dependency-cruiser.cjs src"
   },
   "dependencies": {
-    "@ooopsstudio/cms-api": "^0.3.0"
+    "@ooopsstudio/workspace-api": "^0.4.0"
   },
   "devDependencies": {
     "typescript": "^5.9.3",
@@ -38,12 +38,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ooops-studio/ooops-cms-packages.git",
+    "url": "git+https://github.com/ooops-studio/ooops-workspace-packages.git",
     "directory": "packages/cms-astro"
   },
-  "homepage": "https://github.com/ooops-studio/ooops-cms-packages/tree/main/packages/cms-astro#readme",
+  "homepage": "https://github.com/ooops-studio/ooops-workspace-packages/tree/main/packages/cms-astro#readme",
   "bugs": {
-    "url": "https://github.com/ooops-studio/ooops-cms-packages/issues"
+    "url": "https://github.com/ooops-studio/ooops-workspace-packages/issues"
   },
   "publishConfig": {
     "access": "public"

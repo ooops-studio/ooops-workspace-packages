@@ -27,6 +27,13 @@ describe('OoopsCmsClient OpenAPI parity', () => {
 		expect(typeof client.analytics.runtime).toBe('function')
 	})
 
+	it('documents the canonical current single and additive video contracts', () => {
+		const single = openApi.paths['/content/singles/{apiId}']?.get as {responses: {'200': {content: {'application/json': {schema: {required: string[]; properties: Record<string, unknown>}}}}}}
+		expect(single.responses['200'].content['application/json'].schema.required).toContain('data')
+		expect(openApi.components.schemas.VideoDelivery?.properties).toHaveProperty('playbackStatusUrl')
+		expect(openApi.paths).toHaveProperty('/assets/playback/{assetId}')
+	})
+
 	it('does not expose removed write/import/webhook APIs', () => {
 		for (const path of ['/imports/validate', '/media/sign-upload', '/webhooks']) {
 			expect(openApi.paths).not.toHaveProperty(path)

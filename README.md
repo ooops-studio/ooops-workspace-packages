@@ -1,12 +1,12 @@
-# Ooops CMS Packages
+# Ooops Workspace Packages
 
-Public, ESM-only integration packages for consuming Ooops CMS from applications and Astro sites.
+Public, ESM-only integration packages for consuming Ooops Workspace from applications and Astro sites.
 
 ## Packages
 
-- `@ooopsstudio/cms-api`: typed read, preview, forms and media clients.
-- `@ooopsstudio/cms-astro`: Astro-oriented content, locale, SEO and sitemap helpers.
-- `@ooopsstudio/cms-cloudflare`: secure Cloudflare preview-session and response helpers.
+- `@ooopsstudio/workspace-api`: typed read, preview, forms and media clients.
+- `@ooopsstudio/workspace-astro`: Astro-oriented content, locale, SEO and sitemap helpers.
+- `@ooopsstudio/workspace-cloudflare`: secure Cloudflare preview-session and response helpers.
 
 The packages are deliberately separate from the CMS application. They expose stable consumer contracts without importing application internals or owning CMS data.
 
@@ -25,9 +25,9 @@ pnpm validate
 Use package-scoped commands while iterating:
 
 ```sh
-pnpm --filter @ooopsstudio/cms-api test
-pnpm --filter @ooopsstudio/cms-astro test
-pnpm --filter @ooopsstudio/cms-cloudflare test
+pnpm --filter @ooopsstudio/workspace-api test
+pnpm --filter @ooopsstudio/workspace-astro test
+pnpm --filter @ooopsstudio/workspace-cloudflare test
 pnpm check:cms-compatibility
 ```
 
@@ -51,10 +51,10 @@ During local development, sibling repositories may override these packages with 
 
 Changesets control package versions and npm publishing. The dependency order is:
 
-1. `@ooopsstudio/cms-api`
-2. `@ooopsstudio/cms-astro` and `@ooopsstudio/cms-cloudflare`
+1. `@ooopsstudio/workspace-api`
+2. `@ooopsstudio/workspace-astro` and `@ooopsstudio/workspace-cloudflare`
 
-Before the first publish, configure npm trusted publishing for `ooops-studio/ooops-cms-packages`, protect `main`, and run the Release workflow with `dry_run=true`.
+Before the first publish, configure npm trusted publishing for `ooops-studio/ooops-workspace-packages`, protect `main`, and run the Release workflow with `dry_run=true`.
 
 ## License
 

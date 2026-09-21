@@ -1,7 +1,7 @@
 {
-  "name": "@ooopsstudio/cms-api",
-  "version": "0.3.1",
-  "description": "Typed TypeScript client for the Ooops CMS REST API v1.",
+  "name": "@ooopsstudio/workspace-api",
+  "version": "0.4.0",
+  "description": "Typed TypeScript client for the Ooops Workspace REST API v1.",
   "type": "module",
   "private": false,
   "license": "MIT",
@@ -36,12 +36,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ooops-studio/ooops-cms-packages.git",
+    "url": "git+https://github.com/ooops-studio/ooops-workspace-packages.git",
     "directory": "packages/cms-api"
   },
-  "homepage": "https://github.com/ooops-studio/ooops-cms-packages/tree/main/packages/cms-api#readme",
+  "homepage": "https://github.com/ooops-studio/ooops-workspace-packages/tree/main/packages/cms-api#readme",
   "bugs": {
-    "url": "https://github.com/ooops-studio/ooops-cms-packages/issues"
+    "url": "https://github.com/ooops-studio/ooops-workspace-packages/issues"
   },
   "publishConfig": {
     "access": "public"

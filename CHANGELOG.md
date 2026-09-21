@@ -4,6 +4,6 @@ Package releases are tracked through Changesets and package-specific changelog e
 
 ## Unreleased
 
-- Extracted `cms-api`, `cms-astro` and `cms-cloudflare` from the Ooops CMS application.
+- Extracted `cms-api`, `cms-astro` and `cms-cloudflare` from the Ooops Workspace application.
 - Removed the former package names and repository references.
 - Upgraded the repository baseline to Node.js 22 and pnpm 11.
