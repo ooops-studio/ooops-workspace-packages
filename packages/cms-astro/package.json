@@ -1,6 +1,6 @@
 {
   "name": "@ooopsstudio/workspace-astro",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Astro-friendly helpers for Ooops Workspace consumer sites.",
   "type": "module",
   "private": false,
@@ -30,7 +30,7 @@
     "depcruise": "depcruise --config ../../.dependency-cruiser.cjs src"
   },
   "dependencies": {
-    "@ooopsstudio/workspace-api": "^0.4.0"
+    "@ooopsstudio/workspace-api": "^0.5.0"
   },
   "devDependencies": {
     "typescript": "^5.9.3",

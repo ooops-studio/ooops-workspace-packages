@@ -137,7 +137,7 @@ importers:
   packages/cms-astro:
     dependencies:
       '@ooopsstudio/workspace-api':
-        specifier: ^0.4.0
+        specifier: ^0.5.0
         version: link:../cms-api
     devDependencies:
       typescript:
@@ -150,7 +150,7 @@ importers:
   packages/cms-cloudflare:
     dependencies:
       '@ooopsstudio/workspace-api':
-        specifier: ^0.4.0
+        specifier: ^0.5.0
         version: link:../cms-api
     devDependencies:
       typescript:

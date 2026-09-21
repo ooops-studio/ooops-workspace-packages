@@ -1,5 +1,11 @@
 # @ooopsstudio/workspace-api
 
+## 0.5.0
+
+### Minor Changes
+
+- [`ec5effd`](https://github.com/ooops-studio/ooops-workspace-packages/commit/ec5effdb054bffc6120e02a4b640967b6cee652a) Thanks [@italiour](https://github.com/italiour)! - Add a pure resolver for localized content media, gallery overrides, stable nested field paths and per-use alt/caption text from the public media catalog.
+
 ## 0.4.0
 
 ### Minor Changes

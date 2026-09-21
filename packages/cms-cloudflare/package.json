@@ -1,6 +1,6 @@
 {
   "name": "@ooopsstudio/workspace-cloudflare",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Cloudflare helpers for secure Ooops Workspace previews and signed static-site rebuilds.",
   "type": "module",
   "private": false,
@@ -34,7 +34,7 @@
     "vitest": "^3.2.7"
   },
   "dependencies": {
-    "@ooopsstudio/workspace-api": "^0.4.0"
+    "@ooopsstudio/workspace-api": "^0.5.0"
   },
   "repository": {
     "type": "git",

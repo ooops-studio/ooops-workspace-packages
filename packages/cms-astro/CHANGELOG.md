@@ -1,5 +1,12 @@
 # @ooopsstudio/workspace-astro
 
+## 0.3.1
+
+### Patch Changes
+
+- Updated dependencies [[`ec5effd`](https://github.com/ooops-studio/ooops-workspace-packages/commit/ec5effdb054bffc6120e02a4b640967b6cee652a)]:
+  - @ooopsstudio/workspace-api@0.5.0
+
 ## 0.3.0
 
 ### Minor Changes
