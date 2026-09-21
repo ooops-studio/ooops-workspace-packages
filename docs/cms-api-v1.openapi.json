@@ -35,7 +35,7 @@
       "bearerToken": {
         "type": "http",
         "scheme": "bearer",
-        "bearerFormat": "CMS API token"
+        "bearerFormat": "Workspace API token"
       }
     },
     "schemas": {
@@ -344,7 +344,7 @@
         "tags": [
           "Schema"
         ],
-        "summary": "List CMS schema, fields, and locales.",
+        "summary": "List Workspace schema, fields, and locales.",
         "x-scopes": [
           "cms:schema:read"
         ],
