@@ -86,3 +86,19 @@ MIT
 ### Single response compatibility
 
 `CmsSingleResponse<T>` describes the current `{ ok: true, data: T }` wire response. For older CMS versions use `CmsLegacySingleResponse<T>` (`content`) explicitly, or a union during a rolling upgrade. Readers do not silently rewrite server payloads. This type correction is queued for the next minor release; existing 0.3.x consumers may retain their explicit data/content union until upgrading.
+
+### Media per language
+
+Use the public response's `_media` catalog and `_mediaUsages` projection together:
+
+```ts
+import { resolveWorkspaceContentMedia } from '@ooopsstudio/workspace-api';
+const image = resolveWorkspaceContentMedia(entry, 'cover', 'el');
+const nestedImage = resolveWorkspaceContentMedia(entry, 'sections.stable-row-id.image', 'el');
+```
+
+The result is one public file, an ordered gallery, `null` for hidden/unavailable files,
+ or `undefined` for an absent field. Files include resolved `alt` and `caption` text.
+An empty gallery remains empty. Omitted overrides use the native content reference;
+explicit empty text remains empty. Stable repeater row IDs survive reordering.
+The helper performs no network requests and never exposes private catalog entries.

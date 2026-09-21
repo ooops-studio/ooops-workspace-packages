@@ -564,3 +564,5 @@ export const createCmsPublicFormsClient = (options: CmsPublicFormsClientOptions)
 
 export const createCmsPreviewClient = (options: CmsPreviewClientOptions) =>
 	new OoopsCmsPreviewClient(options)
+
+export {resolveWorkspaceContentMedia, type WorkspaceMediaFile} from './media.js'

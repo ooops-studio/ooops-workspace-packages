@@ -151,8 +151,17 @@ async function writeConsumerChecks(consumerDir, pkgInfo, exportEntries) {
 	const typeSpecifiers = exportEntries
 		.filter(([, definition]) => isTypeImportableExport(definition))
 		.map(([entry]) => exportKeyToSpecifier(pkgInfo.name, entry))
-	const consumerJs = runtimeSpecifiers.map((specifier) => `await import('${specifier}')`).join('\n') + '\n'
+	let consumerJs = runtimeSpecifiers.map((specifier) => `await import('${specifier}')`).join('\n') + '\n'
 	const consumerTs = typeSpecifiers.map((specifier) => `import '${specifier}'`).join('\n') + '\n'
+
+	if (pkgInfo.name === '@ooopsstudio/workspace-api') {
+		consumerJs += `
+const {resolveWorkspaceContentMedia} = await import('@ooopsstudio/workspace-api')
+const entry = {_media: {file: {publicUrl: 'https://example.test/file.png'}}, _mediaUsages: {cover: {en: {assetId: 'file', alt: ''}, el: null}}}
+if (resolveWorkspaceContentMedia(entry, 'cover', 'en')?.alt !== '') throw new Error('Packed media resolver lost explicit empty alt')
+if (resolveWorkspaceContentMedia(entry, 'cover', 'el') !== null) throw new Error('Packed media resolver lost explicit null')
+`
+	}
 
 	await writeFile(path.join(consumerDir, 'consumer.mjs'), consumerJs)
 	await writeFile(path.join(consumerDir, 'consumer.ts'), consumerTs)
